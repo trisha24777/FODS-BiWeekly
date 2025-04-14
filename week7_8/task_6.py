@@ -1,17 +1,6 @@
 """
 Program: Take user input array, sort and perform slicing
 
-This program demonstrates array manipulation in NumPy by:
-1. Taking user input of integers
-2. Converting the input into a NumPy array
-3. Sorting the array
-4. Performing various slicing operations on the sorted array
-
-The program shows different ways to slice arrays and access specific
-ranges of elements within the array.
-
-Author: [Your Name]
-Date: [Current Date]
 """
 
 import numpy as np

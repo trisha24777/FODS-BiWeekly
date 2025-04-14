@@ -1,19 +1,6 @@
 """
 Program: Perform multiple operations on employee DataFrame
 
-This program demonstrates various Pandas DataFrame operations using an employee dataset.
-It performs multiple data manipulation and analysis tasks including:
-- Basic column selection and filtering
-- Department-wise analysis
-- Salary calculations and categorization
-- Date-based operations
-- Data cleaning and transformation
-
-The program showcases common data analysis operations that might be performed
-on employee records in a real-world scenario.
-
-Author: [Your Name]
-Date: [Current Date]
 """
 
 import pandas as pd

@@ -1,16 +1,6 @@
 """
 Program: Create, sort and reshape a random integer array
 
-This program demonstrates NumPy array operations by:
-1. Creating an array of random integers
-2. Sorting the array in ascending order
-3. Reshaping the array into a 2x5 matrix
-
-The program shows how to generate random numbers, sort arrays,
-and reshape them into different dimensions while maintaining the data.
-
-Author: [Your Name]
-Date: [Current Date]
 """
 
 import numpy as np

@@ -1,15 +1,6 @@
 """
 Program: Perform addition, subtraction, multiplication, and division on two Pandas Series
 
-This program demonstrates basic arithmetic operations on Pandas Series objects.
-It creates two Series with three elements each and performs element-wise
-arithmetic operations between them.
-
-The program shows how Pandas Series support vectorized operations, allowing
-for efficient element-wise calculations without explicit loops.
-
-Author: [Your Name]
-Date: [Current Date]
 """
 
 import pandas as pd

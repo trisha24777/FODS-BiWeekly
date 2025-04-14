@@ -1,17 +1,6 @@
 """
 Program: Generate a random array with user-defined shape and calculate average
 
-This program creates a random array of specified dimensions using NumPy's random module
-and calculates its average value. The user provides the number of rows and columns
-for the array.
-
-The program:
-1. Takes user input for array dimensions
-2. Generates a random array with values between 0 and 1
-3. Displays the array and calculates its mean
-
-Author: [Your Name]
-Date: [Current Date]
 """
 
 import numpy as np
