@@ -1,7 +1,3 @@
-'''
-This program implements a basic library book management system with functionalities
-to issue, return, and search for books. It uses OOP and file handling for storage.
-'''
 import csv
 
 class Book:
@@ -43,21 +39,22 @@ class Library:
 
     def _load_books(self):
         """
-        Loads book data from the CSV file.
+        Loads book data from the CSV file into a dictionary.
         """
         books = {}
         try:
             with open(self.filename, 'r', newline='') as csvfile:
                 reader = csv.reader(csvfile)
-                header = next(reader, None)  # Skip header
+                header = next(reader, None)  # Skip header row
                 if header:
+                    # Loop through the rows and create Book objects
                     for row in reader:
                         try:
-                            book_id = int(row[0])
+                            book_id = int(row[0])  # Parse book ID as integer
                             title = row[1]
                             author = row[2]
-                            is_available = row[3].lower() == 'true'
-                            books[book_id] = Book(book_id, title, author, is_available)
+                            is_available = row[3].lower() == 'true'  # Check availability status
+                            books[book_id] = Book(book_id, title, author, is_available)  # Add to dictionary
                         except (ValueError, IndexError) as e:
                             print(f"Error reading book data: {row} - {e}")
         except FileNotFoundError:
@@ -73,7 +70,8 @@ class Library:
         try:
             with open(self.filename, 'w', newline='') as csvfile:
                 writer = csv.writer(csvfile)
-                writer.writerow(["BookID", "Title", "Author", "IsAvailable"]) # Write header
+                writer.writerow(["BookID", "Title", "Author", "IsAvailable"])  # Write header row
+                # Write details of each book
                 for book in self.books.values():
                     writer.writerow(book.get_details())
             print("Book data saved successfully.")
@@ -82,23 +80,23 @@ class Library:
 
     def add_book(self, book):
         """
-        Adds a new book to the library.
+        Adds a new book to the library and saves it to the file.
         """
-        if book.book_id not in self.books:
+        if book.book_id not in self.books:  # Ensure unique book ID
             self.books[book.book_id] = book
-            self._save_books()
+            self._save_books()  # Save the updated book data to file
             print(f"Book '{book.title}' added successfully.")
         else:
             print(f"Error: Book with ID '{book.book_id}' already exists.")
 
     def issue_book(self, book_id):
         """
-        Issues a book from the library.
+        Issues a book (marks it as unavailable).
         """
         if book_id in self.books:
             if self.books[book_id].is_available:
-                self.books[book_id].is_available = False
-                self._save_books()
+                self.books[book_id].is_available = False  # Mark as issued
+                self._save_books()  # Save changes
                 print(f"Book '{self.books[book_id].title}' issued successfully.")
             else:
                 print(f"Error: Book with ID '{book_id}' is already issued.")
@@ -107,12 +105,12 @@ class Library:
 
     def return_book(self, book_id):
         """
-        Returns a book to the library.
+        Returns a book (marks it as available).
         """
         if book_id in self.books:
             if not self.books[book_id].is_available:
-                self.books[book_id].is_available = True
-                self._save_books()
+                self.books[book_id].is_available = True  # Mark as available
+                self._save_books()  # Save changes
                 print(f"Book '{self.books[book_id].title}' returned successfully.")
             else:
                 print(f"Error: Book with ID '{book_id}' is already available.")
@@ -121,16 +119,18 @@ class Library:
 
     def search_book(self, search_term):
         """
-        Searches for books by title or author.
+        Searches for books by title or author and displays results.
         """
         results = []
-        search_term = search_term.lower()
+        search_term = search_term.lower()  # Convert search term to lowercase for case-insensitive comparison
+        # Loop through books and find matching books
         for book in self.books.values():
             if search_term in book.title.lower() or search_term in book.author.lower():
                 results.append(book)
 
         if results:
             print("\nSearch Results:")
+            # Print the details of each matched book
             for book in results:
                 print(book)
         else:
@@ -140,7 +140,7 @@ def main():
     """
     Main function to run the library management system.
     """
-    library = Library()
+    library = Library()  # Initialize the Library object
 
     while True:
         print("\nLibrary Management System")
@@ -153,24 +153,25 @@ def main():
         choice = input("Enter your choice: ")
 
         try:
+            # Handle user input for each option
             if choice == '1':
                 book_id = int(input("Enter Book ID: "))
                 title = input("Enter Book Title: ")
                 author = input("Enter Book Author: ")
-                new_book = Book(book_id, title, author)
+                new_book = Book(book_id, title, author)  # Create a new Book object
                 library.add_book(new_book)
             elif choice == '2':
                 book_id = int(input("Enter Book ID to issue: "))
-                library.issue_book(book_id)
+                library.issue_book(book_id)  # Issue the selected book
             elif choice == '3':
                 book_id = int(input("Enter Book ID to return: "))
-                library.return_book(book_id)
+                library.return_book(book_id)  # Return the selected book
             elif choice == '4':
                 search_term = input("Enter title or author to search: ")
-                library.search_book(search_term)
+                library.search_book(search_term)  # Search for books
             elif choice == '5':
                 print("Exiting the library management system.")
-                break
+                break  # Exit the system
             else:
                 print("Invalid choice. Please try again.")
         except ValueError:
@@ -179,4 +180,4 @@ def main():
             print(f"An unexpected error occurred: {e}")
 
 if __name__ == "__main__":
-    main()
+    main()  # Run the library management system
